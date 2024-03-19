@@ -1,0 +1,12 @@
+.training {
+    width: 100%;
+    height: 100%;
+    /* padding: 0px !important; */
+}
+.description-help {
+}
+.training-participants,
+.training-settings,
+.training-scripts {
+    padding: 24px;
+}

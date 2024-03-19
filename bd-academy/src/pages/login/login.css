@@ -1,0 +1,24 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 330px;
+}
+.login h1 {
+    font-size: 35px;
+    line-height: 52px;
+}
+.login * {
+    width: 100%;
+}
+.login-platforms {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.forgot-password-link {
+    width: unset;
+}

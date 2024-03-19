@@ -1,0 +1,22 @@
+.app-layout {
+    /* height: calc(100% - 63px); */
+    height: 100%;
+    background: var(--content);
+    position: relative;
+}
+.app-layout--nosidebar {
+    padding: 0px 60px;
+}
+.app-layout > div {
+    height: 100%;
+    width: 100%;
+    /* padding: 14px; */
+}
+
+.app-content {
+    padding: 20px;
+    padding-top: 32px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}

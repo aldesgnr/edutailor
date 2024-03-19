@@ -1,0 +1,6 @@
+@bd_academy_backend_HostAddress = http://localhost:5082
+
+GET {{bd_academy_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

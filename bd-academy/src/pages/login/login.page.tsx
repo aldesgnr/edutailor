@@ -1,0 +1,133 @@
+import { PrimeIcons } from 'primereact/api'
+import { Button } from 'primereact/button'
+import { Checkbox } from 'primereact/checkbox'
+import { InputText } from 'primereact/inputtext'
+import { Password } from 'primereact/password'
+import { classNames } from 'primereact/utils'
+import { FunctionComponent, useContext, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+
+import { LoginFormFields } from '../../services/auth.service'
+import { loginManager } from '../../services/login-manager.service'
+import './login.css'
+import { GlobalToast } from '../../services/gloabal-toast'
+
+export type LoginPageProps = {}
+
+export const LoginPage: FunctionComponent<LoginPageProps> = () => {
+    const navigate = useNavigate()
+    const [rememberMe, setRememberMe] = useState(false)
+
+    const defaultValues: LoginFormFields = {
+        email: '',
+        password: '',
+    }
+
+    const {
+        control,
+        formState: { errors },
+        handleSubmit,
+        // getValues,
+        reset,
+    } = useForm({ defaultValues })
+
+    const onSubmit = (data: LoginFormFields) => {
+        loginManager
+            .login(data, rememberMe)
+            .then(() => {
+                navigate('/dashboard')
+                reset()
+            })
+            .catch((error) => {
+                GlobalToast.toastShow?.('Error', 'Login failed', 'error')
+            })
+    }
+
+    const getFormErrorMessage = (name: keyof LoginFormFields) => {
+        return errors[name] ? <small className="p-error">{errors[name]?.message}</small> : <small className="p-error">&nbsp;</small>
+    }
+    return (
+        <div className={'login'}>
+            <Button
+                label="Click me to signin"
+                className={'bg-[var(--primary)] text-[30px]'}
+                onClick={() => {
+                    //TURN OFF
+                    window.localStorage.setItem('user_token', 'test_login')
+                    loginManager.isLoggedIn = true
+                    loginManager.inited.next(true)
+                    navigate('/dashboard')
+                }}
+            />
+            <br />
+            <h1>Sign in</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+                <Controller
+                    name="email"
+                    control={control}
+                    rules={{ required: 'Email is required' }}
+                    render={({ field, fieldState }) => (
+                        <>
+                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.email })}></label>
+                            <span className="p-float-label">
+                                <InputText
+                                    id={field.name}
+                                    value={field.value}
+                                    className={classNames({ 'p-invalid': fieldState.error })}
+                                    onChange={(e) => field.onChange(e.target.value)}
+                                />
+                                <label htmlFor={field.name}>Email</label>
+                            </span>
+                            {getFormErrorMessage(field.name)}
+                        </>
+                    )}
+                />
+                <Controller
+                    name="password"
+                    control={control}
+                    rules={{ required: 'Password is required' }}
+                    render={({ field, fieldState }) => (
+                        <>
+                            <label htmlFor={field.name} className={classNames({ 'p-error': errors.password })}></label>
+                            <span className="p-float-label">
+                                <Password
+                                    id={field.name}
+                                    value={field.value}
+                                    className={classNames({ 'p-invalid': fieldState.error })}
+                                    onChange={(e) => field.onChange(e.target.value)}
+                                />
+                                <label htmlFor={field.name}>Password</label>
+                            </span>
+                            <div className={'flex flex-row justify-end w-full'}>
+                                <span className={'w-[unset] cursor-pointer forgot-password-link'} onClick={() => navigate('/auth/forgot-password')}>
+                                    Forgot password ?
+                                </span>
+                            </div>
+                            {getFormErrorMessage(field.name)}
+                        </>
+                    )}
+                />
+                <div className="flex align-items-center">
+                    <Checkbox id="rememberMe" onChange={(e) => setRememberMe(e.value)} checked={rememberMe}></Checkbox>
+                    <label className={'cursor-pointer ml-2'} htmlFor="rememberMe" onClick={() => setRememberMe(!rememberMe)}>
+                        Remember me
+                    </label>
+                </div>
+                <Button label="Sign in" type="submit" />
+                <p className={'text-center'}>Login with</p>
+                <div className="login-platforms">
+                    <Button label="Google" icon={PrimeIcons.GOOGLE} />
+                    <Button label="Facebook" icon={PrimeIcons.FACEBOOK} />
+                </div>
+
+                <p>
+                    Don't have an account?{' '}
+                    <span className={'cursor-pointer'} onClick={() => navigate('/auth/register')}>
+                        Sign up
+                    </span>
+                </p>
+            </form>
+        </div>
+    )
+}

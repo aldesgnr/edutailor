@@ -1,0 +1,78 @@
+#graph-container input {
+    background: white;
+    color: black;
+    width: 100%;
+    border-radius: 30px;
+    background-color: white;
+    padding: 2px 6px;
+    border: 1px solid #999;
+    font-size: 110%;
+    box-sizing: border-box;
+}
+
+h2 {
+    font-size: 24px;
+    line-height: 32px;
+    text-transform: uppercase;
+}
+
+.p-tabview .p-tabview-nav .p-tabview-nav-link {
+    background: var(--content);
+    padding: 10px;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    border-color: var(--primary);
+}
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: var(--content);
+    color: var(--primary);
+}
+.p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.p-inputtext {
+    background-color: var(--dark-800);
+}
+
+.text-bold {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 14px;
+}
+.text-small {
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+}
+.text-big {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
+}
+
+label {
+    color: #fff;
+    font-family: Satoshi;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+}
+small {
+    color: var(--dark-200);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.p-avatar img {
+    width: auto;
+    height: auto;
+}

@@ -1,0 +1,313 @@
+{
+    "scenario": {
+        "name": "Porozmawiajmy",
+        "language": "pl"
+    },
+    "nodes": [
+        {
+            "id": "start",
+            "position": [0, 0],
+            "title": "Start",
+            "name": "StartNode",
+            "nodeType": "StartNode"
+        },
+        {
+            "name": "ParentNode",
+            "id": "ask1",
+            "position": [0, 0],
+            "nodeType": "ParentNode",
+            "title": "PYTANIA - Zgoda na rozmowę o masie ciała",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "ask2",
+            "position": [0, 0],
+            "title": "PYTANIA - Gotowość do zmiany",
+            "nodeType": "ParentNode",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "id": "ask11",
+            "position": [-250, 0],
+            "nodeType": "NPCNode",
+            "title": "Przywitanie",
+            "parentNodeId": "ask1",
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Dzień dobry Panie Doktorze. Dziękuję za wizytę. Zgłaszam się ponownie, ponieważ ból w moim kolanie nie zmniejszył się. Jestem pewna, że to przez ten stary wypadek na nartach, o którym Panu mówiłam. Potrzebuję pomocy, bo mnie to boli. Czy możemy coś z tym zrobić?"
+                }
+            ],
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "id": "ask12",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "ask1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Oczywiście Pani Wando, znajdziemy wspólnie rozwiązanie. Wydaje mi się, że masa ciała może powodować nasilanie się dolegliwości. Czy możemy porozmawiać na ten temat?"
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Oczywiście Pani Wando, myślę, że Pani masa ciała może powodować nasilanie się dolegliwości. Chciałbym więc porozmawiać na ten temat."
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Oczywiście Pani Wando. Obawiam się, że to Pani masa ciała powoduje nasilanie się dolegliwości. Czy możemy porozmawiać o możliwych dla Pani sposobach redukcji masy ciała?"
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "ask13",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "ask1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Tak. Wiem, że ostatnio przytyłam i też zastanawiałam się, czy to może mieć coś wspólnego."
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Aha... Nie pomyślałam o tym. Ale jeśli w tym leży przyczyna problemu..."
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Cóż, wiem, że ostatnio nieco przytyłam i pracuję nad tym. Nie jest to łatwe – tyle się dzieje."
+                }
+            ]
+        },
+        {
+            "id": "ask21",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "ask2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Dobrze. Czy czuje się Pani gotowa na to, abyśmy razem przemyśleli plan leczenia?"
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Nie jest łatwo poradzić sobie z nadmierną masą ciała. Czy podejmie Pani tę próbę?"
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Czy jest Pani gotowa zredukować kilka kilogramów?"
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "ask22",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "ask2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Chciałabym spróbować ale nie wiem czy sama dam radę. Próbowałam wiele razy, ale czuję, że utknęłam w martwym punkcie"
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Wiem, że to moja wina, ale naprawdę staram się schudnąć. Tyle się dzieje w pracy i w domu."
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Hmm... Chyba tak. Ale tak wiele rzeczy może się zdarzyć w międzyczasie..."
+                }
+            ]
+        },
+
+        {
+            "id": "end",
+            "position": [1250, 0],
+            "title": "END",
+            "name": "EndNode",
+            "nodeType": "EndNode"
+        },
+        {
+            "id": "summaryPoints",
+            "position": [1250, 0],
+            "title": "SummaryPointsNode",
+            "name": "SummaryPointsNode",
+            "nodeType": "SummaryPointsNode"
+        }
+    ],
+    "connections": [
+        {
+            "source": "start",
+            "sourceOutput": "start",
+            "target": "ask11",
+            "targetInput": "execute"
+        },
+        {
+            "source": "ask11",
+            "sourceOutput": "executed",
+            "target": "ask12",
+            "targetInput": "execute"
+        },
+        {
+            "source": "ask12",
+            "sourceOutput": "executed",
+            "target": "ask13",
+            "targetInput": "execute"
+        },
+        {
+            "source": "ask12",
+            "sourceOutput": "statement1",
+            "target": "ask13",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "ask12",
+            "sourceOutput": "statement2",
+            "target": "ask13",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "ask12",
+            "sourceOutput": "statement3",
+            "target": "ask13",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "ask13",
+            "sourceOutput": "executed",
+            "target": "ask21",
+            "targetInput": "execute"
+        },
+        {
+            "source": "ask21",
+            "sourceOutput": "executed",
+            "target": "ask22",
+            "targetInput": "execute"
+        },
+        {
+            "source": "ask21",
+            "sourceOutput": "statement1",
+            "target": "ask22",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "ask21",
+            "sourceOutput": "statement2",
+            "target": "ask22",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "ask21",
+            "sourceOutput": "statement3",
+            "target": "ask22",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "ask22",
+            "sourceOutput": "executed",
+            "target": "end",
+            "targetInput": "end"
+        }
+    ]
+}

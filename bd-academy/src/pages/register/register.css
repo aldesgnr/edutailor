@@ -1,0 +1,21 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 330px;
+}
+.register h1 {
+    font-size: 35px;
+    line-height: 52px;
+}
+.register * {
+    width: 100%;
+}
+.register-platforms {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}

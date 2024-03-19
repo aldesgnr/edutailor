@@ -1,0 +1,40 @@
+.navbar {
+    width: 100%;
+    min-width: 100%;
+    height: 63px;
+    min-height: 63px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--dark-800);
+    color: var(--navbarText);
+    padding: 14px;
+}
+.logo {
+    width: 88px;
+    height: 47px;
+}
+.navbar-right {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.navbar-right i {
+    /* width: 20px;
+    height: 20px; */
+    font-size: 20px;
+}
+.navbar-right i:last-child {
+    font-size: 13px;
+}
+.navbar-menubar {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}

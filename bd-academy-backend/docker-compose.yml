@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  bd-academy-backend:
+    image: ${DOCKER_REGISTRY-}bdacademybackend
+    environment:
+          ASPNETCORE_ENVIRONMENT: DevelopmentDocker
+    build:
+      context: .
+      dockerfile: bd-academy-backend/Dockerfile
+
+      
+  mysql:
+    container_name: mysql
+    image: mysql:8.2.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - mysql_volume:/var/lib/mysql
+    ports:
+      - "3310:3306"
+
+volumes:
+  mysql_volume:

@@ -1,0 +1,43 @@
+.infinity-loader-container {
+    position: relative;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    transition: opacity 1s;
+    pointer-events: none;
+    position: absolute;
+    z-index: 1190;
+    background: #0c0c0c;
+    pointer-events: none;
+    cursor: progress;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 44px;
+}
+.infinity-loader {
+    width: 128px;
+    height: 128px;
+    transform: rotate(0deg);
+    animation: rotation 1s infinite linear;
+
+    border: 5px solid #c3c3c3;
+    border-bottom-color: #4f9e5b;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+
+    pointer-events: none;
+    cursor: progress;
+    z-index: 1190;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

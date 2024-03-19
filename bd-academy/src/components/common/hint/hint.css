@@ -1,0 +1,10 @@
+.hint {
+    border-radius: 8px;
+    display: flex;
+    width: 100%;
+    padding: 4px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    background: var(--Gradient-Sceny, linear-gradient(0deg, #292b2d 20.79%, #1c5843 84.73%, #38f2ae 164.32%));
+}

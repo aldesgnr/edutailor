@@ -1,0 +1,1847 @@
+{
+    "scenario": {
+        "name": "Porozmawiajmy",
+        "language": "pl"
+    },
+    "nodes": [
+        {
+            "name": "ParentNode",
+            "id": "ask1",
+            "position": [0, 0],
+            "nodeType": "ParentNode",
+            "title": "PYTANIA - Zgoda na rozmowę o masie ciała",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "ask2",
+            "position": [0, 0],
+            "title": "PYTANIA - Gotowość do zmiany",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "assess1",
+            "position": [0, 0],
+            "title": "OCENA - Identyfikacja przyczyn",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "assess2",
+            "position": [0, 0],
+            "title": "OCENA - Ocena zagrożeń dla zdrowia",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "assess3",
+            "position": [0, 0],
+            "title": "OCENA - Przeszkody w procesie zmiany",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "advise1",
+            "position": [0, 0],
+            "title": "PORADA - Ryzyko związane z otyłością",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "advise2",
+            "position": [0, 0],
+            "title": "PORADA - Korzyści z redukcji masy ciała",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "advise3",
+            "position": [0, 0],
+            "title": "PORADA - Omówienie możliwości leczenia",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "agree1",
+            "position": [0, 0],
+            "title": "ZGODA - Oczekiwania dotyczące redukcji masy ciała",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "agree2",
+            "position": [0, 0],
+            "title": "ZGODA - Cele behawioralne",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "agree3",
+            "position": [0, 0],
+            "title": "ZGODA -  Plan leczenia",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "assist1",
+            "position": [0, 0],
+            "title": "POMOC – Rozwiązanie kwestii przyczyn i przeszkód",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "assist2",
+            "position": [0, 0],
+            "title": "POMOC – Skierowanie do odpowiedniego specjalisty",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "name": "ParentNode",
+            "id": "assist3",
+            "position": [0, 0],
+            "title": "POMOC – Umówienie wizyty kontrolnej",
+            "nodeType": "ParentNode",
+            "inputs": []
+        },
+        {
+            "id": "start",
+            "position": [-500, 0],
+            "title": "START",
+            "name": "StartNode",
+            "nodeType": "StartNode"
+        },
+        {
+            "id": "ask11",
+            "position": [-250, 0],
+            "nodeType": "NPCNode",
+            "title": "Przywitanie",
+
+            "parentNodeId": "ask1",
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Dzień dobry Panie Doktorze. Dziękuję za wizytę. Zgłaszam się ponownie, ponieważ ból w moim kolanie nie zmniejszył się. Jestem pewna, że to przez ten stary wypadek na nartach, o którym Panu mówiłam. Potrzebuję pomocy, bo mnie to boli. Czy możemy coś z tym zrobić?"
+                }
+            ],
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "id": "ask12",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "ask1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Oczywiście Pani Wando, znajdziemy wspólnie rozwiązanie. Wydaje mi się, że masa ciała może powodować nasilanie się dolegliwości. Czy możemy porozmawiać na ten temat?"
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Oczywiście Pani Wando, myślę, że Pani masa ciała może powodować nasilanie się dolegliwości. Chciałbym więc porozmawiać na ten temat."
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Oczywiście Pani Wando. Obawiam się, że to Pani masa ciała powoduje nasilanie się dolegliwości. Czy możemy porozmawiać o możliwych dla Pani sposobach redukcji masy ciała?"
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "ask13",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "ask1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Tak. Wiem, że ostatnio przytyłam i też zastanawiałam się, czy to może mieć coś wspólnego."
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Aha... Nie pomyślałam o tym. Ale jeśli w tym leży przyczyna problemu..."
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Cóż, wiem, że ostatnio nieco przytyłam i pracuję nad tym. Nie jest to łatwe – tyle się dzieje."
+                }
+            ]
+        },
+        {
+            "id": "ask21",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "ask2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Dobrze. Czy czuje się Pani gotowa na to, abyśmy razem przemyśleli plan leczenia?"
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Nie jest łatwo poradzić sobie z nadmierną masą ciała. Czy podejmie Pani tę próbę?"
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Czy jest Pani gotowa zredukować kilka kilogramów?"
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "ask22",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "ask2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Chciałabym spróbować ale nie wiem czy sama dam radę. Próbowałam wiele razy, ale czuję, że utknęłam w martwym punkcie"
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Wiem, że to moja wina, ale naprawdę staram się schudnąć. Tyle się dzieje w pracy i w domu."
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Hmm... Chyba tak. Ale tak wiele rzeczy może się zdarzyć w międzyczasie..."
+                }
+            ]
+        },
+        {
+            "id": "assess11",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "assess1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Rozumiem. Ludzie zwiększają masę ciała z wielu przyczyn. Czy ma Pani jakiś pomysł, co mogło się do tego przyczynić w Pani przypadku?"
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Nadmierna masa ciała może być spowodowana traumą w dzieciństwie i problemami psychicznymi. Czy może to Pani dotyczyć?"
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Dobrze, zacznijmy od omówienia Pani sprawności fizycznej. Jaką aktywność Pani podejmuje w ciągu tygodnia?"
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "assess12",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "assess1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Myślę, że to był ten wypadek na nartach kiedy miałam dwadzieścia kilka lat. Jeździłam profesjonalnie i naprawdę kochałam ten sport. Tak z resztą poznałam męża. A potem ten wypadek... Więc znalazłam pracę w biurze, a potem pojawiły się dzieci. I zanim się obejrzałam... Wie Pan [sygnalizuje swoją masę ciała]."
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Nie za bardzo. Nic z tych rzeczy. To był po prostu ten wypadek na nartach kiedy miałam dwadzieścia kilka lat i wtedy wszystko się zmieniło. Pracuję w biurze, mam rodzinę i zanim się obejrzałam... Wie Pan, Panie Doktorze [sygnalizuje swoją masę ciała]."
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Już mówiłam. Kolano nie pozwala mi na takie rzeczy. Kiedyś – przed wypadkiem – byłam naprawdę w dobrej formie. Jeździłam na nartach profesjonalnie. A teraz... [sygnalizuje swoją masę ciała]."
+                }
+            ]
+        },
+        {
+            "id": "assess21",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "assess2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Co Panią najbardziej martwi, jeśli chodzi o zwiększenie masy ciała?  "
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Nadmierna masa ciała może powodować wiele problemów zdrowotnych, od chorób serca do trudności z oddychaniem, cukrzycy, problemów z poruszaniem się i innych. Czy to Panią niepokoi?"
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Z całą pewnością nadmierna masa ciała zaczyna już rzutować na Pani zdrowie i utrudniać życie. Mam rację? "
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "assess22",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "assess2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "To, że mogę skończyć jak mój Tata. On chorował na serce. Chcę też mieć aktywne życie, zwłaszcza przy dzieciach, i tak dalej. No i chcę się dobrze czuć sama ze sobą, tak jak kiedyś."
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Domyślam się, że mogę być narażona na ryzyko tych chorób, ale na razie jest dobrze. Tylko ta mobilność kolana mnie niepokoi"
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": " Nie za bardzo. Czuję się dobrze. Tylko to kolano mi przeszkadza."
+                }
+            ]
+        },
+        {
+            "id": "assess31",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "assess3",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": " Jak Pani wie, redukcja masy ciała może być trudna. Co według Pani może ten proces utrudnić? "
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Co będzie dla Pani największym wyzwaniem, jeśli chodzi o aktywność fizyczną i zmianę nawyków żywieniowych?"
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": " Spotykam wielu pacjentów, którzy myślą, że mogę po prostu dać im jakiś lek. Ale będzie Pani musiała poczynić znaczące zmiany. Czy jest Pani naprawdę na to gotowa?"
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "assess32",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "assess3",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ": Myślę, że po prostu moje życie. Rozwiązanie problemu z kolanem to mój priorytet. Dochodzi do tego brak czasu: praca, rodzina, opieka nad dziećmi. "
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Nie przyszłam tu po to, aby prosić o leki na redukcję masy ciała! Przyszłam z powodu mojego kolana"
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": "Nie przyszłam tu po to, aby prosić o leki na redukcję masy ciała! Przyszłam z powodu mojego kolana."
+                }
+            ]
+        },
+        {
+            "id": "advise11",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "advise1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "advise12",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "advise1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "id": "advise21",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "advise2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "advise22",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "advise2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "id": "advise31",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "advise3",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "advise32",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "advise3",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "id": "agree11",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "agree1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "agree12",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "agree1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "id": "agree21",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "agree2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "agree22",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "agree2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "id": "agree31",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "agree3",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "agree32",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "agree3",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "id": "assist11",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "assist1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "assist12",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "assist1",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "id": "assist21",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "assist2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "assist22",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "assist2",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "id": "assist31",
+            "position": [250, 0],
+            "nodeType": "StatementNode",
+            "parentNodeId": "assist3",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Doctor"
+                },
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": -10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 10,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ],
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "statement1"
+                },
+                {
+                    "name": "statement2"
+                },
+                {
+                    "name": "statement3"
+                }
+            ]
+        },
+        {
+            "id": "assist32",
+            "position": [750, 0],
+            "nodeType": "NPCNode",
+            "parentNodeId": "assist3",
+            "controls": [
+                {
+                    "name": "person",
+                    "type": "select",
+                    "value": "Wanda"
+                }
+            ],
+            "outputs": [],
+            "inputs": [
+                {
+                    "name": "statement1",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement2",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                },
+                {
+                    "name": "statement3",
+                    "points": 0,
+                    "delay": "Infinity",
+                    "type": "statement",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "id": "end",
+            "position": [1250, 0],
+            "title": "END",
+            "name": "EndNode",
+            "nodeType": "EndNode"
+        },
+        {
+            "id": "summaryPoints",
+            "position": [1250, 0],
+            "title": "SummaryPointsNode",
+            "name": "SummaryPointsNode",
+            "nodeType": "SummaryPointsNode"
+        }
+    ],
+    "connections": [
+        {
+            "source": "ask1",
+            "sourceOutput": "out",
+            "target": "ask2",
+            "targetInput": "in"
+        },
+        {
+            "source": "ask2",
+            "sourceOutput": "out",
+            "target": "assess1",
+            "targetInput": "in"
+        },
+        {
+            "source": "assess1",
+            "sourceOutput": "out",
+            "target": "assess2",
+            "targetInput": "in"
+        },
+        {
+            "source": "assess2",
+            "sourceOutput": "out",
+            "target": "assess3",
+            "targetInput": "in"
+        },
+        {
+            "source": "assess3",
+            "sourceOutput": "out",
+            "target": "advise1",
+            "targetInput": "in"
+        },
+        {
+            "source": "advise1",
+            "sourceOutput": "out",
+            "target": "advise2",
+            "targetInput": "in"
+        },
+        {
+            "source": "advise2",
+            "sourceOutput": "out",
+            "target": "advise3",
+            "targetInput": "in"
+        },
+        {
+            "source": "advise3",
+            "sourceOutput": "out",
+            "target": "agree1",
+            "targetInput": "in"
+        },
+        {
+            "source": "agree1",
+            "sourceOutput": "out",
+            "target": "agree2",
+            "targetInput": "in"
+        },
+        {
+            "source": "agree2",
+            "sourceOutput": "out",
+            "target": "agree3",
+            "targetInput": "in"
+        },
+        {
+            "source": "agree3",
+            "sourceOutput": "out",
+            "target": "assist1",
+            "targetInput": "in"
+        },
+        {
+            "source": "assist1",
+            "sourceOutput": "out",
+            "target": "assist2",
+            "targetInput": "in"
+        },
+        {
+            "source": "assist2",
+            "sourceOutput": "out",
+            "target": "assist3",
+            "targetInput": "in"
+        },
+        {
+            "source": "start",
+            "sourceOutput": "start",
+            "target": "ask11",
+            "targetInput": "execute"
+        },
+        {
+            "source": "ask11",
+            "sourceOutput": "executed",
+            "target": "ask12",
+            "targetInput": "execute"
+        },
+        {
+            "source": "ask12",
+            "sourceOutput": "executed",
+            "target": "ask13",
+            "targetInput": "execute"
+        },
+        {
+            "source": "ask12",
+            "sourceOutput": "statement1",
+            "target": "ask13",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "ask12",
+            "sourceOutput": "statement2",
+            "target": "ask13",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "ask12",
+            "sourceOutput": "statement3",
+            "target": "ask13",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "ask13",
+            "sourceOutput": "executed",
+            "target": "ask21",
+            "targetInput": "execute"
+        },
+        {
+            "source": "ask21",
+            "sourceOutput": "executed",
+            "target": "ask22",
+            "targetInput": "execute"
+        },
+        {
+            "source": "ask21",
+            "sourceOutput": "statement1",
+            "target": "ask22",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "ask21",
+            "sourceOutput": "statement2",
+            "target": "ask22",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "ask21",
+            "sourceOutput": "statement3",
+            "target": "ask22",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "ask22",
+            "sourceOutput": "executed",
+            "target": "assess11",
+            "targetInput": "execute"
+        },
+        {
+            "source": "assess11",
+            "sourceOutput": "executed",
+            "target": "assess12",
+            "targetInput": "execute"
+        },
+        {
+            "source": "assess11",
+            "sourceOutput": "statement1",
+            "target": "assess12",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "assess11",
+            "sourceOutput": "statement2",
+            "target": "assess12",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "assess11",
+            "sourceOutput": "statement3",
+            "target": "assess12",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "assess12",
+            "sourceOutput": "executed",
+            "target": "assess21",
+            "targetInput": "execute"
+        },
+        {
+            "source": "assess21",
+            "sourceOutput": "executed",
+            "target": "assess22",
+            "targetInput": "execute"
+        },
+        {
+            "source": "assess21",
+            "sourceOutput": "statement1",
+            "target": "assess22",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "assess21",
+            "sourceOutput": "statement2",
+            "target": "assess22",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "assess21",
+            "sourceOutput": "statement3",
+            "target": "assess22",
+            "targetInput": "statement3"
+        },
+
+        {
+            "source": "assess22",
+            "sourceOutput": "executed",
+            "target": "assess31",
+            "targetInput": "execute"
+        },
+
+        {
+            "source": "assess31",
+            "sourceOutput": "executed",
+            "target": "assess32",
+            "targetInput": "execute"
+        },
+        {
+            "source": "assess31",
+            "sourceOutput": "statement1",
+            "target": "assess32",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "assess31",
+            "sourceOutput": "statement2",
+            "target": "assess32",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "assess31",
+            "sourceOutput": "statement3",
+            "target": "assess32",
+            "targetInput": "statement3"
+        },
+
+        {
+            "source": "assess32",
+            "sourceOutput": "executed",
+            "target": "advise11",
+            "targetInput": "execute"
+        },
+
+        {
+            "source": "advise11",
+            "sourceOutput": "executed",
+            "target": "advise12",
+            "targetInput": "execute"
+        },
+        {
+            "source": "advise11",
+            "sourceOutput": "statement1",
+            "target": "advise12",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "advise11",
+            "sourceOutput": "statement2",
+            "target": "advise12",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "advise11",
+            "sourceOutput": "statement3",
+            "target": "advise12",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "advise12",
+            "sourceOutput": "executed",
+            "target": "advise21",
+            "targetInput": "execute"
+        },
+
+        {
+            "source": "advise21",
+            "sourceOutput": "executed",
+            "target": "advise22",
+            "targetInput": "execute"
+        },
+        {
+            "source": "advise21",
+            "sourceOutput": "statement1",
+            "target": "advise22",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "advise21",
+            "sourceOutput": "statement2",
+            "target": "advise22",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "advise21",
+            "sourceOutput": "statement3",
+            "target": "advise22",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "advise22",
+            "sourceOutput": "executed",
+            "target": "advise31",
+            "targetInput": "execute"
+        },
+        {
+            "source": "advise31",
+            "sourceOutput": "statement1",
+            "target": "advise32",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "advise31",
+            "sourceOutput": "statement2",
+            "target": "advise32",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "advise31",
+            "sourceOutput": "statement3",
+            "target": "advise32",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "advise32",
+            "sourceOutput": "executed",
+            "target": "agree11",
+            "targetInput": "execute"
+        },
+
+        {
+            "source": "agree11",
+            "sourceOutput": "executed",
+            "target": "agree12",
+            "targetInput": "execute"
+        },
+        {
+            "source": "agree11",
+            "sourceOutput": "statement1",
+            "target": "agree12",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "agree11",
+            "sourceOutput": "statement2",
+            "target": "agree12",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "agree11",
+            "sourceOutput": "statement3",
+            "target": "agree12",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "agree12",
+            "sourceOutput": "executed",
+            "target": "agree21",
+            "targetInput": "execute"
+        },
+
+        {
+            "source": "agree21",
+            "sourceOutput": "executed",
+            "target": "agree22",
+            "targetInput": "execute"
+        },
+        {
+            "source": "agree21",
+            "sourceOutput": "statement1",
+            "target": "agree22",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "agree21",
+            "sourceOutput": "statement2",
+            "target": "agree22",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "agree21",
+            "sourceOutput": "statement3",
+            "target": "agree22",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "agree22",
+            "sourceOutput": "executed",
+            "target": "agree31",
+            "targetInput": "execute"
+        },
+
+        {
+            "source": "agree31",
+            "sourceOutput": "executed",
+            "target": "agree32",
+            "targetInput": "execute"
+        },
+        {
+            "source": "agree31",
+            "sourceOutput": "statement1",
+            "target": "agree32",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "agree31",
+            "sourceOutput": "statement2",
+            "target": "agree32",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "agree31",
+            "sourceOutput": "statement3",
+            "target": "agree32",
+            "targetInput": "statement3"
+        },
+        {
+            "source": "agree32",
+            "sourceOutput": "executed",
+            "target": "assist11",
+            "targetInput": "execute"
+        },
+
+        {
+            "source": "assist11",
+            "sourceOutput": "executed",
+            "target": "assist12",
+            "targetInput": "execute"
+        },
+        {
+            "source": "assist11",
+            "sourceOutput": "statement1",
+            "target": "assist12",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "assist11",
+            "sourceOutput": "statement2",
+            "target": "assist12",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "assist11",
+            "sourceOutput": "statement3",
+            "target": "assist12",
+            "targetInput": "statement3"
+        },
+
+        {
+            "source": "assist12",
+            "sourceOutput": "executed",
+            "target": "assist21",
+            "targetInput": "execute"
+        },
+        {
+            "source": "assist21",
+            "sourceOutput": "executed",
+            "target": "assist22",
+            "targetInput": "execute"
+        },
+        {
+            "source": "assist21",
+            "sourceOutput": "statement1",
+            "target": "assist22",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "assist21",
+            "sourceOutput": "statement2",
+            "target": "assist22",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "assist21",
+            "sourceOutput": "statement3",
+            "target": "assist22",
+            "targetInput": "statement3"
+        },
+
+        {
+            "source": "assist22",
+            "sourceOutput": "executed",
+            "target": "assist31",
+            "targetInput": "execute"
+        },
+
+        {
+            "source": "assist31",
+            "sourceOutput": "executed",
+            "target": "assist32",
+            "targetInput": "execute"
+        },
+        {
+            "source": "assist31",
+            "sourceOutput": "statement1",
+            "target": "assist32",
+            "targetInput": "statement1"
+        },
+        {
+            "source": "assist31",
+            "sourceOutput": "statement2",
+            "target": "assist32",
+            "targetInput": "statement2"
+        },
+        {
+            "source": "assist31",
+            "sourceOutput": "statement3",
+            "target": "assist32",
+            "targetInput": "statement3"
+        },
+
+        {
+            "source": "assist32",
+            "sourceOutput": "executed",
+            "target": "end",
+            "targetInput": "end"
+        }
+    ]
+}

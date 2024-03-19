@@ -1,0 +1,8 @@
+.auth-layout {
+    /* height: calc(100% - 63px); */
+    height: 100%;
+    background: var(--content);
+}
+.auth-layout div:first {
+    height: 100%;
+}

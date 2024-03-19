@@ -1,0 +1,5 @@
+bin
+obj
+UpgradeLog*
+.vs
+appsettings.Production.json
