@@ -49,7 +49,7 @@ export default class SceneManager {
     private _loadEnvironment() {
         const files = [
             {
-                url: '/env/skybox/env.hdr',
+                url: appConfig().BASE_URL + '/env/skybox/env.hdr',
                 filename: 'env.hdr',
             },
         ]
