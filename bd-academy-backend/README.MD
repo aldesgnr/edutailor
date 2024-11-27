@@ -89,3 +89,7 @@ Copy this to `/home/ilms-braindance/htdocs/braindance.ilms.api/api/appsettings.D
   }
 }
 ```
+## Run
+### Windows
+Use xampp and start MySql Server.
+Use `dotnet run` in bd-academy-backend/bd-academy-backend.

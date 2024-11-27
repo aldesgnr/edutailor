@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "http-server": "http-server -p 7890 --cors",
+    "http-server": "http-server -p 5008 --cors",
     "start": "node index.js",
     "start:host": "node index.js 5008 192.168.33.44"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "http": "^0.0.1-security",
     "http-server": "^14.1.1"
   }
 }

@@ -1,4 +1,4 @@
-const https = require("https");
+const http = require("http");
 const url = require("url");
 const fs = require("fs");
 const path = require("path");
@@ -7,9 +7,9 @@ const hostname = process.argv[3] || "localhost";
 
 const options = {
   key: fs.readFileSync("./server.key"),
-  cert: fs.readFileSync("./server.cert"),
+  cert: fs.readFileSync("./server.crt"),
 };
-https
+http
   .createServer(options, function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Request-Method", "*");
