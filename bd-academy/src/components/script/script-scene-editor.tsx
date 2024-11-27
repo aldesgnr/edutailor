@@ -62,7 +62,6 @@ export const ScriptSceneEditorComponent: FunctionComponent<ScriptSceneEditorComp
     // }, [scene])
     useEffect(() => {
         if (avtiveTab === EditorRightPanelTabs.SCENE) {
-            console.log('a')
             setTimeout(() => {
                 editorManager.resetScripts()
             }, 100)

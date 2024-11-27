@@ -1,15 +1,21 @@
+const https = require("https");
 const http = require("http");
 const url = require("url");
 const fs = require("fs");
 const path = require("path");
 const port = process.argv[2] || 5008;
 const hostname = process.argv[3] || "localhost";
+const dev = process.argv[4] && process.argv[4] == 'dev' ? true : false;
 
 const options = {
   key: fs.readFileSync("./server.key"),
   cert: fs.readFileSync("./server.crt"),
 };
-http
+server_module = http
+if (dev == true) {
+  server_module = http
+}
+server_module
   .createServer(options, function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Request-Method", "*");
@@ -98,5 +104,4 @@ http
     }
   })
   .listen(parseInt(port), hostname);
-
-console.log(`Server listening on port https://${hostname}:${port}`);
+console.log(`Server listening on port ${dev == true ? "http" : 'https'}://${hostname}:${port}`);

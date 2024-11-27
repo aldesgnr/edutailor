@@ -100,8 +100,8 @@ export default class ViewerManager {
                 antialias: true,
             },
         })
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ;(this.app as any).name = this.canvas.id
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ; (this.app as any).name = this.canvas.id
         if (this.diagnostic.domElement) document.body.prepend(this.diagnostic.domElement)
         this.scenarioEngine = new ScenarioEngine(this.app, new SceneMiddelware())
         if (this.scenarioEngine.editorContainer && !document.querySelector('#dialogDebugWrapper')) {
@@ -375,7 +375,7 @@ export default class ViewerManager {
         return new Promise<void>((resolve, reject) => {
             modulesToLoad.push(this.ammoManager.loadAmmo())
             Promise.all(modulesToLoad)
-                .then(() => {})
+                .then(() => { })
                 .then(() => {
                     resolve()
                 })

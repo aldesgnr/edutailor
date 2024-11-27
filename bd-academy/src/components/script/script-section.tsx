@@ -204,8 +204,17 @@ export const ScriptSectionComponent: FunctionComponent<ScriptSectionComponentPro
 
             <div className={'flex flex-row gap-[14px]'}>
                 <SecondaryButton label={'Scene'} icon={PrimeIcons.PLUS} onClick={onClickAddScene}></SecondaryButton>
-                <SecondaryButton label={'Quiz'} icon={PrimeIcons.PLUS} onClick={onClickAddQuiz}></SecondaryButton>
-                <SecondaryButton label={'File'} icon={PrimeIcons.PLUS} onClick={onClickAddFile}></SecondaryButton>
+                <div className={'relative'}>
+                    <div className={'w-full h-full flex  justify-center items-center absolute'}>
+                        <span className={'text-[var(--primary)] '} style={{ fontSize: '12px' }}>
+                            Comming soon!
+                        </span>
+                    </div>
+                    <div className="flex flex-row gap-[14px] opacity-35">
+                        <SecondaryButton label={'Quiz'} icon={PrimeIcons.PLUS} onClick={onClickAddQuiz} disabled={true}></SecondaryButton>
+                        <SecondaryButton label={'File'} icon={PrimeIcons.PLUS} onClick={onClickAddFile} disabled={true}></SecondaryButton>
+                    </div>
+                </div>
             </div>
 
             {sceneToPreview && (

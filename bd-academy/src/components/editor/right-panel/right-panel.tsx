@@ -5,6 +5,7 @@ import { EditorContext } from '../../../contexts/editor-context'
 import { AssetInfo, AvatarInfo } from '../../../lib/editor-manager/editor.types'
 import { PersonsPanel } from './persons-panel'
 import { ScriptsPanel } from './scripts-panel'
+import { GlobalToast } from '../../../services/gloabal-toast'
 export type EditorRightPanelProps = {}
 
 export enum EditorRightPanelTabs {
@@ -48,6 +49,8 @@ export const EditorRightPanel: FunctionComponent<EditorRightPanelProps> = () => 
     const onClickAvatar = (avatar: AvatarInfo) => {
         if (editorManager.selectedAvatar.value) {
             editorManager.selectedAvatar.value.replaceAvatar(avatar)
+        } else {
+            GlobalToast.toastShow?.('Avatar', 'Please select Avatar or Yellow Box on scene.', 'warn')
         }
     }
 
@@ -73,12 +76,19 @@ export const EditorRightPanel: FunctionComponent<EditorRightPanelProps> = () => 
                     </div>
                     <div
                         className={`flex flex-row  h-[60px] justify-start items-center   w-full gap-[8px] px-[8px] rounded-[8px_0px_0px_8px] cursor-pointer
-                        hover:bg-[var(--dark-600)]
+                        hover:bg-[var(--dark-600)] pointer-events-none
                             ${avtiveTab === EditorRightPanelTabs.SCRIPTS ? 'bg-[var(--content)] text-[var(--primary)]' : ' bg-[var(--dark-800)]'}`}
                         onClick={() => setActiveTab(EditorRightPanelTabs.SCRIPTS)}
                     >
-                        <i className={PrimeIcons.COMMENTS} />
-                        <span>Scripts</span>
+                        <div className="opacity-10">
+                            <i className={PrimeIcons.COMMENTS} />
+                            <span>Scripts</span>
+                        </div>
+                        <div className={'w-[calc(100%-16px)] flex h-[60px] justify-center items-center absolute'}>
+                            <span className={'text-[var(--primary)] '} style={{ fontSize: '12px' }}>
+                                Comming soon!
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
