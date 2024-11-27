@@ -91,7 +91,7 @@ export const TrainingCardComponent: FunctionComponent<TrainingCardComponentProps
                 {(training as any).type == 'QUIZ' ? (
                     <div className={'w-full h-full flex  justify-center items-center absolute'}>
                         <span className={'text-[var(--primary)] '} style={{ fontSize: '20px' }}>
-                            Comming coon!
+                            Comming soon!
                         </span>
                     </div>
                 ) : (
