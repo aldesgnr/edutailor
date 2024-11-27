@@ -3,11 +3,12 @@ import { FunctionComponent } from 'react'
 export type MenuElementSecondaryProps = {
     label: string
     icon?: string
+    disabled?: boolean
 
     onClick?: () => void
 }
 
-export const MenuElementSecondary: FunctionComponent<MenuElementSecondaryProps> = ({ label, icon, onClick }) => {
+export const MenuElementSecondary: FunctionComponent<MenuElementSecondaryProps> = ({ label, icon, disabled = false, onClick }) => {
     const outlined = true
 
     return (
@@ -16,6 +17,7 @@ export const MenuElementSecondary: FunctionComponent<MenuElementSecondaryProps> 
             outlined={outlined}
             label={label}
             icon={icon}
+            disabled={disabled}
             size={'small'}
             onClick={onClick}
             pt={{

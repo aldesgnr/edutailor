@@ -97,6 +97,10 @@ p {
     border: 0px;
 }
 
+.opacity-10 {
+    opacity: 0.1;
+}
+
 .opacity-35 {
     opacity: 0.35;
 }

@@ -206,7 +206,7 @@ export const ScriptSectionComponent: FunctionComponent<ScriptSectionComponentPro
                 <SecondaryButton label={'Scene'} icon={PrimeIcons.PLUS} onClick={onClickAddScene}></SecondaryButton>
                 <div className={'relative'}>
                     <div className={'w-full h-full flex  justify-center items-center absolute'}>
-                        <span className={'text-[var(--primary)] '} style={{ fontSize: '14px' }}>
+                        <span className={'text-[var(--primary)] '} style={{ fontSize: '12px' }}>
                             Comming soon!
                         </span>
                     </div>

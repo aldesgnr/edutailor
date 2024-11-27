@@ -18,6 +18,39 @@
       "avatars": [
         "Person_1"
       ]
+    },
+    {
+      "id": "f2244c64-0a52-4d58-8887-1b999db3f3b9",
+      "name": "Doctor's office",
+      "description": "Doctor's office (ilms_room_firstpersoncamera_one_personv2)",
+      "model": "/static/common/scenes/ilms_room_firstpersoncamera_one_personv2.glb",
+      "previewSceneTraining": "b17e328a-5256-46fb-8682-fed1aa79291a",
+      "image": "https://img.freepik.com/free-vector/3d-isometric-bedroom-interior_1284-35777.jpg",
+      "avatars": [
+        "Person_1"
+      ]
+    },
+    {
+      "id": "bcdc080b-980a-4b63-b270-4ef739d34588",
+      "name": "Doctor's office",
+      "description": "Doctor's office (ilms_room_smaller_pivot_firstpersoncamera_ope_person.glb)",
+      "model": "/static/common/scenes/ilms_room_smaller_pivot_firstpersoncamera_ope_person.glb",
+      "previewSceneTraining": "50013d30-dedb-433e-9fe4-0bb3e335d2fc",
+      "image": "https://img.freepik.com/free-vector/3d-isometric-bedroom-interior_1284-35777.jpg",
+      "avatars": [
+        "Person_1"
+      ]
+    },
+    {
+      "id": "3f1aaf94-ede6-4026-b016-c54337a1acdc",
+      "name": "Doctor's office v3",
+      "description": "Doctor's office (ilms_room_v3.glb)",
+      "model": "/static/common/scenes/ilms_room_v3.glb",
+      "previewSceneTraining": "d7d01457-5748-4974-8d25-5b219029e9c9",
+      "image": "https://img.freepik.com/free-vector/3d-isometric-bedroom-interior_1284-35777.jpg",
+      "avatars": [
+        "Person_1"
+      ]
     }
   ],
   "avatars": [
