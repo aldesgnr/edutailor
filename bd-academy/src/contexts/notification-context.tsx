@@ -20,7 +20,7 @@ const NotificationProvider: React.FC<{ children: ReactElement }> = ({ children }
             if (toast.current.getElement().children[0]?.childNodes?.length > 2) {
                 // toast.current.clear()
             }
-            toast.current.show({ severity: severity, summary: title, detail: message, sticky: true })
+            toast.current.show({ severity: severity, summary: title, detail: message, sticky: false, life: 2000 })
         },
         [toast],
     )
