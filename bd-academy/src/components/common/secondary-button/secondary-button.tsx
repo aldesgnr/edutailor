@@ -5,14 +5,16 @@ export type SecondaryButtonProps = {
     icon?: string
     rounded?: boolean
     outlined?: boolean
+    disabled?: boolean
     onClick?: () => void
 }
 
-export const SecondaryButton: FunctionComponent<SecondaryButtonProps> = ({ label, icon, rounded = false, outlined = true, onClick }) => {
+export const SecondaryButton: FunctionComponent<SecondaryButtonProps> = ({ label, icon, rounded = false, outlined = true, onClick, disabled = false }) => {
     return (
         <Button
             rounded={rounded}
             outlined={outlined}
+            disabled={disabled}
             label={label}
             icon={icon}
             size={'small'}

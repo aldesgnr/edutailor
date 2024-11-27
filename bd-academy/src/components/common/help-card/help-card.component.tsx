@@ -27,7 +27,7 @@ export const HelpCardComponent: FunctionComponent = () => {
             </div>
             <div className={'w-full h-full flex  justify-center items-center absolute'}>
                 <span className={'text-[var(--primary)] '} style={{ fontSize: '20px' }}>
-                    Comming coon!
+                    Comming soon!
                 </span>
             </div>
         </div>

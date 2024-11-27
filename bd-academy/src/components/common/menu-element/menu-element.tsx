@@ -5,10 +5,11 @@ export type MenuElementProps = {
     label: string
     icon?: IconType<ButtonProps>
     active?: boolean
+    disabled?: boolean
     onClick?: () => void
 }
 
-export const MenuElement: FunctionComponent<MenuElementProps> = ({ label, icon, active = false, onClick }) => {
+export const MenuElement: FunctionComponent<MenuElementProps> = ({ label, icon, active = false, disabled = false, onClick }) => {
     const outlined = true
     const [activeState, setActiveState] = useState(active)
     useEffect(() => {
@@ -24,6 +25,7 @@ export const MenuElement: FunctionComponent<MenuElementProps> = ({ label, icon, 
             size={'small'}
             iconPos={'right'}
             onClick={onClick}
+            disabled={disabled}
             pt={{
                 label: {
                     className: `text-[12px] leading-[14px] text-bold duration-0`,
