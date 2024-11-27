@@ -63,7 +63,9 @@ export const TrainingCardComponent: FunctionComponent<TrainingCardComponentProps
             <Card
                 key={'card_' + training.id}
                 title={training.title}
-                className={'w-[260px] min-w-[260px] max-w-[260px] h-[158px] min-h-[158px] max-h-[158px] relative cursor-default drop-shadow-md	'}
+                className={`w-[260px] min-w-[260px] max-w-[260px] h-[158px] min-h-[158px] max-h-[158px] relative cursor-default drop-shadow-md ${
+                    (training as any).type == 'QUIZ' ? 'opacity-35 pointer-events-none' : ''
+                }`}
                 footer={() => (
                     <div className={'flex flex-row justify-end align-center'}>
                         <i className={`${PrimeIcons.ARROW_RIGHT} cursor-pointer text-[19px]`} onClick={onClick} />

@@ -7,7 +7,7 @@ export const HelpCardComponent: FunctionComponent = () => {
         <div
             key={'card_ttttt'}
             className={
-                'p-card p-[0px] rounded-[16px] bg-[var(--dark-800)]  flex flex-row w-[370px] min-w-[370px] max-w-[370px] h-[158px] min-h-[158px] max-h-[158px] h-auto relative cursor-default drop-shadow-md '
+                'p-card p-[0px] rounded-[16px] bg-[var(--dark-800)]  flex flex-row w-[370px] min-w-[370px] max-w-[370px] h-[158px] min-h-[158px] max-h-[158px] h-auto relative cursor-default drop-shadow-md opacity-35 pointer-events-none'
             }
         >
             <div className={` bg-center bg-no-repeat  min-w-[158px] h-[158px]`} style={{ backgroundImage: `url(${appConfig().BASE_URL}/help-card.png)` }}></div>
