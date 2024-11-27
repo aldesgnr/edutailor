@@ -60,33 +60,44 @@ export const TrainingCardComponent: FunctionComponent<TrainingCardComponentProps
     if (training === null) return <></>
     if (type === TrainingCardComponentTypes.NEW) {
         return (
-            <Card
-                key={'card_' + training.id}
-                title={training.title}
-                className={`w-[260px] min-w-[260px] max-w-[260px] h-[158px] min-h-[158px] max-h-[158px] relative cursor-default drop-shadow-md ${
-                    (training as any).type == 'QUIZ' ? 'opacity-35 pointer-events-none' : ''
-                }`}
-                footer={() => (
-                    <div className={'flex flex-row justify-end align-center'}>
-                        <i className={`${PrimeIcons.ARROW_RIGHT} cursor-pointer text-[19px]`} onClick={onClick} />
+            <div className={`flex relative`}>
+                <Card
+                    key={'card_' + training.id}
+                    title={training.title}
+                    className={`w-[260px] min-w-[260px] max-w-[260px] h-[158px] min-h-[158px] max-h-[158px] relative cursor-default drop-shadow-md ${
+                        (training as any).type == 'QUIZ' ? 'opacity-35 pointer-events-none' : ''
+                    }`}
+                    footer={() => (
+                        <div className={'flex flex-row justify-end align-center'}>
+                            <i className={`${PrimeIcons.ARROW_RIGHT} cursor-pointer text-[19px]`} onClick={onClick} />
+                        </div>
+                    )}
+                    pt={{
+                        body: {
+                            className: 'gap-[14px]',
+                        },
+                        content: {
+                            className: 'flex-1',
+                        },
+                    }}
+                >
+                    <div className={'flex flex-col  gap-[14px] pb-[14px]'}>
+                        <p className={'text-[12px] leading-[18px]'}>{training.description}</p>
+                        <div className={'flex flex-row flex-wrap gap-[16px]'}>
+                            {training.labels?.map((labelName) => <Chip key={training.id + '_' + labelName} label={labelName} />)}
+                        </div>
                     </div>
+                </Card>
+                {(training as any).type == 'QUIZ' ? (
+                    <div className={'w-full h-full flex  justify-center items-center absolute'}>
+                        <span className={'text-[var(--primary)] '} style={{ fontSize: '20px' }}>
+                            Comming coon!
+                        </span>
+                    </div>
+                ) : (
+                    <></>
                 )}
-                pt={{
-                    body: {
-                        className: 'gap-[14px]',
-                    },
-                    content: {
-                        className: 'flex-1',
-                    },
-                }}
-            >
-                <div className={'flex flex-col  gap-[14px] pb-[14px]'}>
-                    <p className={'text-[12px] leading-[18px]'}>{training.description}</p>
-                    <div className={'flex flex-row flex-wrap gap-[16px]'}>
-                        {training.labels?.map((labelName) => <Chip key={training.id + '_' + labelName} label={labelName} />)}
-                    </div>
-                </div>
-            </Card>
+            </div>
         )
     }
     return (
