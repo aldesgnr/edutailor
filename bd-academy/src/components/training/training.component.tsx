@@ -16,6 +16,9 @@ import { MenuElementSecondary } from '../common/menu-element/menu-element-second
 import { TrainingParticipantsTabComponent } from './tabs/training-participants-tab.component'
 import { TrainingScriptsTabComponent } from './tabs/training-scripts-tab.component'
 import { TrainingSettingsTabComponent } from './tabs/training-settings-tab.component'
+import { appConfig } from '../../app.config'
+import { GlobalToast } from '../../services/gloabal-toast'
+import { EditorContext } from '../../contexts/editor-context'
 
 const enum TrainingTab {
     SCRIPTS = 'scripts',
@@ -30,6 +33,7 @@ export enum TrainingComponentMode {
 
 export const TrainingComponent: FunctionComponent = () => {
     const { trainingData, updateTrainingData } = useContext(TrainingContext)
+    const { editorManager } = useContext(EditorContext)
     const [trainingComponentMode, setTrainingComponentMode] = useState<TrainingComponentMode>(TrainingComponentMode.EDIT)
 
     const [trainingUUID, setTrainingUUID] = useState<string | null>(null)
@@ -84,6 +88,15 @@ export const TrainingComponent: FunctionComponent = () => {
 
     const onClickPublishTraining = () => {
         console.log('onClickPublishTraining')
+        updateTrainingData(trainingData, true, true).then(() => {
+            Promise.all([editorManager.saveScene(), editorManager.scenarioEngine.saveDialog()])
+                .then(async (values) => {
+                    window.open(`${appConfig().BASE_URL}/viewer?trainingSceneUUID=${editorManager.trainingSceneUUID}`, '_blank', 'noreferrer')
+                })
+                .catch((err) => {
+                    GlobalToast.toastShow?.('Error', err.message, 'error')
+                })
+        })
     }
     const onClickBack = () => {
         if (history.length === 0) {
@@ -199,7 +212,7 @@ export const TrainingComponent: FunctionComponent = () => {
 
             <div className={'relative'}>
                 <div className={'w-full h-full flex  justify-center items-center absolute'}>
-                    <span className={'text-[var(--primary)] '} style={{ fontSize: '14px' }}>
+                    <span className={'text-[var(--primary)] '} style={{ fontSize: '12px' }}>
                         Comming soon!
                     </span>
                 </div>
@@ -227,7 +240,19 @@ export const TrainingComponent: FunctionComponent = () => {
             </div>
         </div>
     )
-    const endContent = <MenuElementSecondary icon={PrimeIcons.UPLOAD} label={'Publish'} onClick={onClickPublishTraining} />
+    const endContent = (
+        <div className={'relative'}>
+            <div className={'w-full h-full flex  justify-center items-center absolute'}>
+                <span className={'text-[var(--primary)] '} style={{ fontSize: '12px' }}>
+                    Comming soon!
+                </span>
+            </div>
+            <div className="flex flex-row gap-[14px] opacity-35">
+                <MenuElementSecondary icon={PrimeIcons.UPLOAD} label={'Publish'} onClick={onClickPublishTraining} disabled={true} />
+            </div>
+        </div>
+    )
+
     if (localTrainingData === null) return <InfinityLoader></InfinityLoader>
 
     return (

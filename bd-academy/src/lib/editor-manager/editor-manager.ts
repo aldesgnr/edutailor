@@ -403,6 +403,7 @@ export class EditorManager extends ViewerManager {
         return this.sceneManager
             .loadScene(scene)
             .then((scene) => {
+                console.log(scene);
                 const propablyFirstPersonCamera = scene.camerasComponents.find(
                     (c) => c.entity.name === 'FirstPerson' || c.entity.name === 'firstPersonCamera' || c.entity.name === 'FirstPersonCamera',
                 )
