@@ -138,7 +138,13 @@ export class OrbitCameraInputMouse extends ScriptType {
         this.lastPoint.set(event.x, event.y)
     }
     public onMouseWheel = (event: any) => {
-        this.orbitCamera.distance -= event.wheel * this.distanceSensitivity * (this.orbitCamera.distance * 0.1)
+        //problem with wheel repaired with this operation
+        // if (isNaN(event.wheel)) {
+        //     throw Error('Cant handle mouse wheel')
+        // }
+        let wheel = event.wheelDelta * -2
+
+        this.orbitCamera.distance -= wheel * this.distanceSensitivity * (this.orbitCamera.distance * 0.1)
         event.event.preventDefault()
     }
 
