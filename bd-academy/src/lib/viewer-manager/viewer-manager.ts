@@ -36,7 +36,7 @@ import SceneMiddelware from '../scene-middelware/scene-middelware'
 import { ScriptManager } from '../script-manager/script-manager'
 // import { createCameraBox, createCollisionBB, createTestBox } from '../utils/playcanvas-utils'
 import { TrainingSectionComponent } from '../../components/script/script-section-component-card'
-import { destroyEntity, traverse } from '../utils/playcanvas-utils'
+import { createCameraBox, destroyEntity, traverse } from '../utils/playcanvas-utils'
 import WebXrManager from '../webxr-manager/webxr-manager'
 
 export enum ManagerType {
@@ -287,11 +287,12 @@ export default class ViewerManager {
                 }
                 if (fp) {
                     this.cameraManager.copyPositionOfCameraToFirstPersonCamera(fp)
-
-                    // const c = createCameraBox(this.app)
-                    // c.setPosition(fp.getWorldTransform().getTranslation())
-                    // c.setEulerAngles(fp.getWorldTransform().getEulerAngles())
-                    // scene.sceneEntity.addChild(c)
+                    if (this.managerType == ManagerType.EDITOR) {
+                        const c = createCameraBox(this.app)
+                        c.setPosition(fp.getWorldTransform().getTranslation())
+                        c.setEulerAngles(fp.getWorldTransform().getEulerAngles())
+                        scene.sceneEntity.addChild(c)
+                    }
                 } else {
                     console.log("Firstpersoncamera wasn't defined on scene, we will use default")
                 }

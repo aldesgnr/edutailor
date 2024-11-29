@@ -90,6 +90,9 @@ export function createCameraBox(app: AppBase | Application) {
     const cameraBoxEntity = new Entity('cameraBoxEntity')
     const boxEntity = new Entity('cameraBox')
     const coneEntity = new Entity('cameraCone')
+    cameraBoxEntity.tags.add("camera")
+    boxEntity.tags.add("camera")
+    coneEntity.tags.add("camera")
     boxEntity.name = 'cameraBox'
     const box = createBox(app.graphicsDevice, {
         halfExtents: new Vec3(0.1, 0.2, 0.2),

@@ -21,6 +21,7 @@ export default class FirstPersonMouseInput extends MouseInput {
         // this.firstPersonCamera.reset()
         if (this.app.xr?.active) return
         if (event.element === this.canvas && document.pointerLockElement !== this.canvas && this.canvas.requestPointerLock) {
+            if (this.canvas.classList.contains('disable-pointer-lock')) return
             this.canvas.requestPointerLock()
         }
     }

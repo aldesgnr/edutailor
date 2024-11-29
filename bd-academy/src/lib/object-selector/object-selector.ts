@@ -109,6 +109,7 @@ export class ObjectSelector extends ScriptType {
         let hoveredObject = null
         if (hovered == undefined || hovered.length === 0) hoveredObject = null
         if (hovered[0]?.node.tags.has('gizmo')) hoveredObject = null
+        if (hovered[0]?.node.tags.has('camera')) return hoveredObject = null
         if (hovered[0]?.node instanceof Entity) {
             hoveredObject = hovered[0].node
         }

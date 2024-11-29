@@ -4,7 +4,7 @@ export default class TextDialogMiddelware {
     dom = document.createElement('div') as HTMLDivElement
     observ = new Map<string, Subject<any>>()
     dialogPlaying = new BehaviorSubject<boolean>(false)
-    private _dialogspeed = 2
+    private _dialogspeed = 1
 
     constructor() {
         this.createContainer()
@@ -38,7 +38,7 @@ export default class TextDialogMiddelware {
     addDialog(statementDef: any, statementControlIndex: string) {
         const dialog = document.createElement('div') as HTMLDivElement
         dialog.id = 'dialog_' + statementDef.name
-        dialog.style.minHeight = '20px'
+        dialog.style.minHeight = '40px'
         dialog.style.color = 'black'
         dialog.textContent = statementDef.value
         dialog.style.cursor = 'pointer'

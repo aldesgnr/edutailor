@@ -42,7 +42,7 @@ import { ControlDef, DialogJson, NodeDef, NodeTypes } from './types'
 
 // type AreaExtra = ReactArea2D<Schemes> | ContextMenuExtra
 type AreaExtra = ReactArea2D<Schemes>
-class Connection<N extends BaseNode> extends ClassicPreset.Connection<N, N> {}
+class Connection<N extends BaseNode> extends ClassicPreset.Connection<N, N> { }
 export type Schemes = GetSchemes<BaseNode, Connection<BaseNode>>
 
 //  type Schemes = GetSchemes<BaseNode, ClassicPreset.Connection<BaseNode, BaseNode>>
@@ -180,7 +180,7 @@ export default class ScenarioEngine {
                         if (node.id === context.data.target) {
                             if (node.inputs && node.inputs[context.data.targetInput]) {
                                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                ;(node.inputs as any)[context.data.targetInput].showControl = true
+                                ; (node.inputs as any)[context.data.targetInput].showControl = true
                             }
                             return
                         }
@@ -253,8 +253,16 @@ export default class ScenarioEngine {
 
         const stB = this.createStatementButtonElement(statementDef)
         stB.enabled = true
-        stB.button?.on('click', () => {
+        stB.element?.on('click', () => {
             this.textDialogMiddelware.onDialogSelected(statementDef, statementControlIndex)
+        })
+        stB.element?.on('mouseenter', () => {
+            document.body.style.cursor = "pointer";
+            this.app?.graphicsDevice.canvas.classList.add('disable-pointer-lock')
+        })
+        stB.element?.on('mouseleave', () => {
+            document.body.style.cursor = "default";
+            this.app?.graphicsDevice.canvas.classList.remove('disable-pointer-lock')
         })
         this.selectStatementContainerEntity?.addChild(stB)
     }
@@ -297,8 +305,8 @@ export default class ScenarioEngine {
             pivot: new Vec2(0, 0),
             anchor: new Vec4(0, 0, 0, 0),
             fontAsset: fontId,
-            fontSize: 20,
-            lineHeight: 20,
+            fontSize: 16,
+            lineHeight: 16,
             text: 'Select statement to response',
             width: this.app?.graphicsDevice.width,
             autoWidth: false,
@@ -320,7 +328,7 @@ export default class ScenarioEngine {
             pivot: new Vec2(0, 0),
             anchor: new Vec4(0, 0, 0, 0),
             width: this.app?.graphicsDevice.width,
-            height: 32,
+            height: 50,
             autoWidth: false,
             autoFitHeight: false,
             autoHeight: false,
@@ -360,7 +368,7 @@ export default class ScenarioEngine {
         statementButton.addComponent('button')
         statementButton.addComponent('element', {
             anchor: [0.5, 0.5, 0.5, 0.5],
-            height: 25,
+            height: 50,
             autoWidth: false,
             autoFitWidth: false,
             autoHeight: false,
@@ -378,16 +386,18 @@ export default class ScenarioEngine {
             margin: new Vec4(0, 0, 0, 0),
             // color: new Color(0, 0, 0),
             fontAsset: fontId,
-            fontSize: 12,
+            fontSize: 16,
             text: statementDef.value,
             type: ELEMENTTYPE_TEXT,
             wrapLines: false,
             autoWidth: true,
             color: new Color(34 / 255, 36 / 255, 39 / 255),
+            hoverTint: new Color(1 / 255, 36 / 255, 2 / 255),
         })
 
         statementButton.addChild(statementButtonText)
 
+        console.log(statementButton, statementButtonText);
         return statementButton
     }
     private createEditorContainer() {
