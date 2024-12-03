@@ -20,7 +20,7 @@ import Avatar from '../avatar-manager/avatar'
 import { ObjectCollision } from '../object-collision/object-collision'
 import { ObjectOutlineHelper } from '../object-selector/object-outline-helper'
 import { TransofrmControlModes } from '../transform-controls/transform-controls'
-import { getPersonEntity } from '../utils/playcanvas-utils'
+import { createCameraBox, getPersonEntity } from '../utils/playcanvas-utils'
 import { createNewTrainingSceneData } from '../utils/training-utils'
 import ViewerManager, { ManagerType } from '../viewer-manager/viewer-manager'
 import { AssetInfo, AvatarInfo, Scene } from './editor.types'
@@ -437,6 +437,13 @@ export class EditorManager extends ViewerManager {
 
                 if (scene.sceneEntity) this.cameraManager.orbitCamera?.focus(scene.sceneEntity as Entity)
                 else this.cameraManager.orbitCamera?.focus(this.sceneManager.editableScene)
+
+                if (scene.sceneEntity && scene.sceneEntity.findByName("cameraBoxEntity") == null && propablyFirstPersonCamera) {
+                    const c = createCameraBox(this.app)
+                    c.setPosition(propablyFirstPersonCamera.entity.getWorldTransform().getTranslation())
+                    c.setEulerAngles(propablyFirstPersonCamera.entity.getWorldTransform().getEulerAngles())
+                    scene.sceneEntity.addChild(c)
+                }
 
                 this.sceneSelected.next(true)
                 this.loadingPercent.next(1)

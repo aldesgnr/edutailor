@@ -288,10 +288,14 @@ export default class ViewerManager {
                 if (fp) {
                     this.cameraManager.copyPositionOfCameraToFirstPersonCamera(fp)
                     if (this.managerType == ManagerType.EDITOR) {
-                        const c = createCameraBox(this.app)
-                        c.setPosition(fp.getWorldTransform().getTranslation())
-                        c.setEulerAngles(fp.getWorldTransform().getEulerAngles())
-                        scene.sceneEntity.addChild(c)
+                        if (scene.sceneEntity.findByName("cameraBoxEntity") == null) {
+                            const c = createCameraBox(this.app)
+                            c.setPosition(fp.getWorldTransform().getTranslation())
+                            c.setEulerAngles(fp.getWorldTransform().getEulerAngles())
+                            scene.sceneEntity.addChild(c)
+                        }
+                    } else {
+                        scene.sceneEntity.findByName("cameraBoxEntity")?.remove()
                     }
                 } else {
                     console.log("Firstpersoncamera wasn't defined on scene, we will use default")
