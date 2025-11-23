@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  bd-academy-backend:
+    build:
+      context: .
+      dockerfile: bd-academy-backend/Dockerfile
+    ports:
+      - "5007:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - Urls=http://0.0.0.0:80
+      - Database__DB_SERVER=host.docker.internal
+      - Database__DB_PORT=3306
+      - Database__DB_NAME=academy
+      - Database__DB_USER=root
+      - Database__DB_PASSWORD=
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

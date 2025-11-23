@@ -3,6 +3,10 @@ import { FunctionComponent, useEffect, useRef, useState } from 'react'
 import { PrimeIcons } from 'primereact/api'
 import { Divider } from 'primereact/divider'
 import { useNavigate } from 'react-router-dom'
+import { ProgressSpinner } from 'primereact/progressspinner'
+import { Message } from 'primereact/message'
+import { GlobalToast } from '../../services/gloabal-toast'
+import { InputText } from 'primereact/inputtext'
 import { HelpCardComponent } from '../../components/common/help-card/help-card.component'
 import { RoundedButton } from '../../components/common/round-button/round-button.components'
 import { TrainingCardComponent, TrainingCardComponentTypes, TrainingData } from '../../components/training/training-card.component'
@@ -24,7 +28,7 @@ export const DashboardPage: FunctionComponent<DashboardPageProps> = () => {
         {
             title: 'VR Training',
             id: '737f3e7b-212d-4d9a-b0e8-788ca198eb53',
-            description: 'Prepare thre trainig scene, develop a scenario and test it in VR',
+            description: 'Prepare the training scene, develop a scenario and test it in VR',
             type: 'VR',
         },
         {
@@ -36,13 +40,16 @@ export const DashboardPage: FunctionComponent<DashboardPageProps> = () => {
         {
             title: 'Quiz',
             id: 'd805f49c-06a7-4ea6-9954-020a8e0d5753',
-            description: 'Configurare aknowlage test',
+            description: 'Configure knowledge test',
             type: 'QUIZ',
         },
     ])
     const [trainings, setTrainings] = useState<TrainingData[]>([])
     const [drafts, setDrafts] = useState<TrainingData[]>([])
     const [favorites, setFavorites] = useState<TrainingData[]>([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState<string | null>(null)
+    const [searchTerm, setSearchTerm] = useState('')
     const navigate = useNavigate()
     const onClickNewTraining = (training: TrainingData) => {
         navigate(`/trainings/new?trainingType=${training.type}`)
@@ -51,21 +58,36 @@ export const DashboardPage: FunctionComponent<DashboardPageProps> = () => {
         navigate(`/trainings/edit?trainingUUID=${training.id}`)
     }
 
-    const refreshTrainings = () => {
-        TrainingService.getTrainings().then((response) => {
+    const refreshTrainings = async () => {
+        setLoading(true)
+        setError(null)
+        try {
+            const response = await TrainingService.getTrainings()
             const t = [...response.data]
             setTrainings(t)
             const d = [...response.data.filter((training: TrainingData) => training.type === 'DRAFT')]
             setDrafts(d)
             const f = [...response.data.filter((training: TrainingData) => training.favorite === true)]
             setFavorites(f)
-        })
+        } catch (err) {
+            const errorMsg = 'Failed to load trainings. Please try again.'
+            setError(errorMsg)
+            GlobalToast.toastShow?.('Error', errorMsg, 'error')
+            console.error('[Dashboard] Error loading trainings:', err)
+        } finally {
+            setLoading(false)
+        }
     }
 
-    const onClickChangeFavorite = (training: TrainingData) => {
-        TrainingService.changeTrainingToFavorite({ trainingId: training.id, trainingCreatorId: '2013c774-01e7-47e6-81cf-15356c1885e1' }).then(() => {
-            refreshTrainings()
-        })
+    const onClickChangeFavorite = async (training: TrainingData) => {
+        try {
+            await TrainingService.changeTrainingToFavorite({ trainingId: training.id, trainingCreatorId: '2013c774-01e7-47e6-81cf-15356c1885e1' })
+            await refreshTrainings()
+            GlobalToast.toastShow?.('Success', 'Favorite updated', 'success')
+        } catch (err) {
+            GlobalToast.toastShow?.('Error', 'Failed to update favorite', 'error')
+            console.error('[Dashboard] Error updating favorite:', err)
+        }
     }
     const onClickEditDraft = (draft: TrainingData) => {
         navigate(`/trainings/edit?trainingUUID=${draft.id}`)
@@ -114,8 +136,33 @@ export const DashboardPage: FunctionComponent<DashboardPageProps> = () => {
             favoritesContainer.current.style.left = (actualLeft - childWidth).toString() + 'px'
         }
     }
+
+    // Filter trainings by search term
+    const filteredFavorites = favorites.filter(t => 
+        searchTerm === '' ||
+        t.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        t.description?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+
+    const filteredDrafts = drafts.filter(t => 
+        searchTerm === '' ||
+        t.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        t.description?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     return (
-        <div className="app-content dashboard flex h-full w-full flex flex-col gap-[32px]">
+        <div className="app-content dashboard flex h-full w-full flex-col gap-[32px]">
+            {error && (
+                <Message severity="error" text={error} className="mb-4" />
+            )}
+            
+            {loading && (
+                <div className="flex justify-center items-center p-8">
+                    <ProgressSpinner />
+                </div>
+            )}
+            
+            {!loading && (
+            <>
             <div className={'flex flex-col gap-[20px]'}>
                 <h2>Create new</h2>
                 <div className={'flex flex-row gap-[20px]'}>
@@ -140,21 +187,32 @@ export const DashboardPage: FunctionComponent<DashboardPageProps> = () => {
                 }}
             />
             <div className={'flex flex-col gap-[20px]'}>
-                <div className={'flex flex-row justify-between'}>
+                <div className={'flex flex-row justify-between items-center'}>
                     <h2>Favorites</h2>
-                    <div className={'flex flex-row gap-[2px]'}>
-                        <RoundedButton icon={PrimeIcons.ARROW_LEFT} size="large" onClick={onClickLeftFavorites}></RoundedButton>
-                        <RoundedButton icon={PrimeIcons.ARROW_RIGHT} size="large" onClick={onClickRightFavorites}></RoundedButton>
+                    <div className={'flex flex-row gap-3 items-center'}>
+                        <span className="p-input-icon-left">
+                            <i className="pi pi-search" />
+                            <InputText 
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                placeholder="Search..."
+                                className="w-48"
+                            />
+                        </span>
+                        <div className={'flex flex-row gap-[2px]'}>
+                            <RoundedButton icon={PrimeIcons.ARROW_LEFT} size="large" onClick={onClickLeftFavorites}></RoundedButton>
+                            <RoundedButton icon={PrimeIcons.ARROW_RIGHT} size="large" onClick={onClickRightFavorites}></RoundedButton>
+                        </div>
                     </div>
                 </div>
                 <div className={'flex flex-row gap-[20px] overflow-x-hidden overflow-y-hidden '} ref={favoritesContainer}>
-                    {favorites.length === 0 && (
+                    {filteredFavorites.length === 0 && (
                         <TrainingNotFoundComponent
-                            message={`It looks like you don't like anyone yet. Click the heart to add file to your favorites`}
+                            message={searchTerm ? `No favorites found matching "${searchTerm}"` : `It looks like you don't like anyone yet. Click the heart to add file to your favorites`}
                             icon={PrimeIcons.HEART}
                         />
                     )}
-                    {favorites.map((training) => (
+                    {filteredFavorites.map((training) => (
                         <TrainingCardComponent
                             key={training.id}
                             type={TrainingCardComponentTypes.TRAINING}
@@ -182,10 +240,13 @@ export const DashboardPage: FunctionComponent<DashboardPageProps> = () => {
                     </div>
                 </div>
                 <div className={'flex flex-row gap-[20px] relative  training-container'} ref={draftsContainer}>
-                    {drafts.length === 0 && (
-                        <TrainingNotFoundComponent message={`The best place for unfinished projects. But you have to start one ...`} icon={PrimeIcons.PENCIL} />
+                    {filteredDrafts.length === 0 && (
+                        <TrainingNotFoundComponent 
+                            message={searchTerm ? `No drafts found matching "${searchTerm}"` : `The best place for unfinished projects. But you have to start one ...`} 
+                            icon={PrimeIcons.PENCIL} 
+                        />
                     )}
-                    {drafts.map((draft) => (
+                    {filteredDrafts.map((draft) => (
                         <TrainingCardComponent
                             key={draft.id}
                             type={TrainingCardComponentTypes.TRAINING}
@@ -196,6 +257,8 @@ export const DashboardPage: FunctionComponent<DashboardPageProps> = () => {
                     ))}
                 </div>
             </div>
+            </>
+            )}
         </div>
     )
 }

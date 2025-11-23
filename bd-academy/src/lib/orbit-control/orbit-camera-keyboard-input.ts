@@ -53,21 +53,31 @@ export class OrbitCameraKeyboardInput extends ScriptType {
     }
     private kandleKeyPressedLoop = () => {
         if (this.orbitCamera) {
+            const moveSpeed = 0.3 // Speed of camera movement
+            
             if (this.app.keyboard.isPressed(KEY_SPACE)) {
                 this.orbitCamera.reset(this.startYaw, this.startPitch, this.startDistance)
                 this.orbitCamera.pivotPoint = this.startPivotPosition
             }
+            
+            // W/UP - Move camera UP (increase Y)
             if (this.app.keyboard.isPressed(KEY_W) || this.app.keyboard.isPressed(KEY_UP)) {
-                this.orbitCamera.pitch = this.orbitCamera.pitch - this.orbitSensitivity
+                this.orbitCamera.pivotPoint.y += moveSpeed
             }
+            
+            // S/DOWN - Move camera DOWN (decrease Y)
             if (this.app.keyboard.isPressed(KEY_S) || this.app.keyboard.isPressed(KEY_DOWN)) {
-                this.orbitCamera.pitch = this.orbitCamera.pitch + this.orbitSensitivity
+                this.orbitCamera.pivotPoint.y -= moveSpeed
             }
+            
+            // A/LEFT - Move camera LEFT (decrease X)
             if (this.app.keyboard.isPressed(KEY_A) || this.app.keyboard.isPressed(KEY_LEFT)) {
-                this.orbitCamera.yaw = this.orbitCamera.yaw - this.orbitSensitivity
+                this.orbitCamera.pivotPoint.x -= moveSpeed
             }
+            
+            // D/RIGHT - Move camera RIGHT (increase X)
             if (this.app.keyboard.isPressed(KEY_D) || this.app.keyboard.isPressed(KEY_RIGHT)) {
-                this.orbitCamera.yaw = this.orbitCamera.yaw + this.orbitSensitivity
+                this.orbitCamera.pivotPoint.x += moveSpeed
             }
         }
     }

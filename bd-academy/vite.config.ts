@@ -12,7 +12,7 @@ export default defineConfig(({ command, mode }) => {
         base: env.VITE_BD_ACADEMY_BASE_URL,
         publicDir: 'public',
         plugins: [
-            basicSsl(),
+            // basicSsl(), // Wyłączone - używamy HTTP zamiast HTTPS
             svgr(),
             react(),
             viteStaticCopy({

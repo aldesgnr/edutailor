@@ -1,4 +1,5 @@
 import { PrimeIcons } from 'primereact/api'
+import { Tooltip } from 'primereact/tooltip'
 import { FunctionComponent, useContext, useEffect, useState } from 'react'
 import { SIDE_PANEL_WIDTH } from '..'
 import { EditorContext } from '../../../contexts/editor-context'
@@ -47,10 +48,18 @@ export const EditorRightPanel: FunctionComponent<EditorRightPanelProps> = () => 
     }, [editorManager])
 
     const onClickAvatar = (avatar: AvatarInfo) => {
+        console.log('[RightPanel] Avatar clicked:', avatar.name)
+        console.log('[RightPanel] Selected avatar:', editorManager.selectedAvatar.value)
+        
         if (editorManager.selectedAvatar.value) {
+            // Replace existing avatar
+            console.log('[RightPanel] Replacing avatar...')
             editorManager.selectedAvatar.value.replaceAvatar(avatar)
+            GlobalToast.toastShow?.('Avatar', 'Avatar replaced successfully!', 'success')
         } else {
-            GlobalToast.toastShow?.('Avatar', 'Please select Avatar or Yellow Box on scene.', 'warn')
+            // Must select avatar first (yellow box)
+            console.log('[RightPanel] No avatar selected - please select Yellow Box first')
+            GlobalToast.toastShow?.('Avatar', 'Please select Avatar (Yellow Box) on scene first.', 'warn')
         }
     }
 
@@ -63,10 +72,14 @@ export const EditorRightPanel: FunctionComponent<EditorRightPanelProps> = () => 
 
             {avtiveTab === EditorRightPanelTabs.SCRIPTS && <ScriptsPanel></ScriptsPanel>}
 
+            {/* Tooltips */}
+            <Tooltip target=".tab-persons" content="Manage avatars and characters" position="left" />
+            <Tooltip target=".tab-scripts" content="Manage training scripts and sections" position="left" />
+            
             <div className={'absolute top-[8px] left-[-115px] '}>
                 <div className={'flex flex-col min-w-[115px] '}>
                     <div
-                        className={`flex flex-row h-[60px] justify-start items-center w-full gap-[8px] px-[8px] rounded-[8px_0px_0px_8px] cursor-pointer
+                        className={`tab-persons flex flex-row h-[60px] justify-start items-center w-full gap-[8px] px-[8px] rounded-[8px_0px_0px_8px] cursor-pointer
                         hover:bg-[var(--dark-600)]
                         ${avtiveTab === EditorRightPanelTabs.PERSONS ? 'bg-[var(--content)] text-[var(--primary)]' : ' bg-[var(--dark-800)]'}`}
                         onClick={() => setActiveTab(EditorRightPanelTabs.PERSONS)}
@@ -75,7 +88,7 @@ export const EditorRightPanel: FunctionComponent<EditorRightPanelProps> = () => 
                         <span>Persons</span>
                     </div>
                     <div
-                        className={`flex flex-row  h-[60px] justify-start items-center   w-full gap-[8px] px-[8px] rounded-[8px_0px_0px_8px] cursor-pointer
+                        className={`tab-scripts flex flex-row  h-[60px] justify-start items-center   w-full gap-[8px] px-[8px] rounded-[8px_0px_0px_8px] cursor-pointer
                         hover:bg-[var(--dark-600)] pointer-events-none
                             ${avtiveTab === EditorRightPanelTabs.SCRIPTS ? 'bg-[var(--content)] text-[var(--primary)]' : ' bg-[var(--dark-800)]'}`}
                         onClick={() => setActiveTab(EditorRightPanelTabs.SCRIPTS)}

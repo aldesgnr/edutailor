@@ -38,6 +38,69 @@ export const EditorPage: FunctionComponent = () => {
         }
     }, [location, editorManager.applicationStarted.value])
 
+    // Fix #001: Reinitialize outline helpers when returning from dialog editor
+    useEffect(() => {
+        if (location.pathname === '/editor' && trainingSceneStarted && editorApplicationStarted) {
+            console.log('[EditorPage] Detected return to editor - reinitializing outline helpers')
+            setTimeout(() => {
+                editorManager.reinitializeOutlineHelpers()
+            }, 500) // Small delay to ensure scene is ready
+        }
+    }, [location.pathname, trainingSceneStarted, editorApplicationStarted])
+
+    // Fix #002: Autosave every 30 seconds
+    useEffect(() => {
+        if (!trainingSceneStarted || !editorApplicationStarted) return
+
+        console.log('[EditorPage] Starting autosave timer (30s interval)')
+        
+        const autosaveInterval = setInterval(async () => {
+            try {
+                console.log('[EditorPage] Autosaving scene...')
+                await editorManager.saveScene()
+                GlobalToast.toastShow?.('Auto-saved', 'Changes saved automatically', 'info')
+                console.log('[EditorPage] Autosave successful')
+            } catch (error) {
+                console.error('[EditorPage] Autosave failed:', error)
+                // Don't show error toast for autosave failures to avoid annoying user
+            }
+        }, 30000) // 30 seconds
+
+        return () => {
+            console.log('[EditorPage] Stopping autosave timer')
+            clearInterval(autosaveInterval)
+        }
+    }, [trainingSceneStarted, editorApplicationStarted])
+
+    // Fix #005: Undo/Redo keyboard shortcuts
+    useEffect(() => {
+        if (!trainingSceneStarted || !editorApplicationStarted) return
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            // Ctrl+Z or Cmd+Z (Mac) - Undo
+            if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+                e.preventDefault()
+                editorManager.undo()
+                GlobalToast.toastShow?.('Undo', 'Last change undone', 'info')
+            }
+            
+            // Ctrl+Y or Cmd+Shift+Z (Mac) - Redo
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey))) {
+                e.preventDefault()
+                editorManager.redo()
+                GlobalToast.toastShow?.('Redo', 'Change redone', 'info')
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+        console.log('[EditorPage] Undo/Redo keyboard shortcuts enabled (Ctrl+Z, Ctrl+Y)')
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+            console.log('[EditorPage] Undo/Redo keyboard shortcuts disabled')
+        }
+    }, [trainingSceneStarted, editorApplicationStarted])
+
     useEffect(() => {
         const loadingPercent$ = editorManager.loadingPercent.subscribe((value) => {
             setProgressValue(value)

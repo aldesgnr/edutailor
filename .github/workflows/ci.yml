@@ -1,0 +1,253 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # Frontend CI
+  frontend-ci:
+    name: Frontend CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./bd-academy
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './bd-academy/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Run unit tests
+        run: npm run test:run
+
+      - name: Generate coverage report
+        run: npm run test:coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./bd-academy/coverage/coverage-final.json
+          flags: frontend
+          name: frontend-coverage
+
+      - name: Build application
+        run: npm run build
+        env:
+          VITE_BD_ACADEMY_BASE_URL: '/'
+          VITE_BD_ACADEMY_API_URL: 'http://localhost:5007'
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-build
+          path: ./bd-academy/dist
+          retention-days: 7
+
+  # Backend CI
+  backend-ci:
+    name: Backend CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./bd-academy-backend
+
+    services:
+      mysql:
+        image: mysql:8.2
+        env:
+          MYSQL_ROOT_PASSWORD: test_password
+          MYSQL_DATABASE: academy_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --verbosity normal
+        env:
+          ConnectionStrings__DefaultConnection: 'Server=localhost;Port=3306;Database=academy_test;User=root;Password=test_password;'
+
+      - name: Publish
+        run: dotnet publish --no-build --configuration Release --output ./publish
+
+      - name: Upload publish artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-publish
+          path: ./bd-academy-backend/publish
+          retention-days: 7
+
+  # E2E Tests
+  e2e-tests:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    needs: [frontend-ci, backend-ci]
+    defaults:
+      run:
+        working-directory: ./bd-academy
+
+    services:
+      mysql:
+        image: mysql:8.2
+        env:
+          MYSQL_ROOT_PASSWORD: test_password
+          MYSQL_DATABASE: academy_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './bd-academy/package-lock.json'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Download backend artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: backend-publish
+          path: ./bd-academy-backend/publish
+
+      - name: Start backend
+        run: |
+          cd ../bd-academy-backend/publish
+          dotnet bd-academy-backend.dll &
+          sleep 10
+        env:
+          ConnectionStrings__DefaultConnection: 'Server=localhost;Port=3306;Database=academy_test;User=root;Password=test_password;'
+          ASPNETCORE_URLS: 'http://localhost:5007'
+
+      - name: Run E2E tests
+        run: npm run test:e2e
+        env:
+          PLAYWRIGHT_BASE_URL: 'http://localhost:5173'
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: ./bd-academy/playwright-report
+          retention-days: 7
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: ./bd-academy/test-results
+          retention-days: 7
+
+  # Code Quality
+  code-quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=edutailor-academy
+            -Dsonar.organization=your-org
+            -Dsonar.sources=bd-academy/src,bd-academy-backend
+            -Dsonar.tests=bd-academy/src,bd-academy/e2e
+            -Dsonar.javascript.lcov.reportPaths=bd-academy/coverage/lcov.info
+
+  # Security Scan
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Notification
+  notify:
+    name: Notify Results
+    runs-on: ubuntu-latest
+    needs: [frontend-ci, backend-ci, e2e-tests, code-quality, security-scan]
+    if: always()
+
+    steps:
+      - name: Send notification
+        run: |
+          echo "CI Pipeline completed"
+          echo "Frontend CI: ${{ needs.frontend-ci.result }}"
+          echo "Backend CI: ${{ needs.backend-ci.result }}"
+          echo "E2E Tests: ${{ needs.e2e-tests.result }}"
+          echo "Code Quality: ${{ needs.code-quality.result }}"
+          echo "Security Scan: ${{ needs.security-scan.result }}"

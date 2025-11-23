@@ -29,6 +29,17 @@ export default class TrainingService {
     static changeTrainingToFavorite(favoriteData: { trainingId: string; trainingCreatorId: string }) {
         return http.post(`/api/TrainingFavorite`, favoriteData, {})
     }
+
+    // Fix #003: Validate training before publish
+    static validateTraining(id: string) {
+        return http.get<ValidationResult>(`/api/Trainings/${id}/validate`)
+    }
+}
+
+// Validation result interface
+export interface ValidationResult {
+    isValid: boolean
+    errors: string[]
 }
 
 export function uuidv4() {

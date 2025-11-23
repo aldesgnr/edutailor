@@ -18,12 +18,24 @@ class LoginManager {
 
     async login(data: LoginFormFields, rememberMe: boolean) {
         try {
+            console.log('[LoginManager] Attempting login...', { email: data.email })
             const responseLogin = await AuthService.loginRequest(data)
+            console.log('[LoginManager] Login response:', responseLogin.data)
+            
+            if (!responseLogin.data.accessToken) {
+                console.error('[LoginManager] No accessToken in response!', responseLogin.data)
+                throw new Error('No access token received')
+            }
+            
             TokenManager.setAccessToken(responseLogin.data.accessToken, rememberMe)
             this.isLoggedIn = true
             this.inited.next(true)
+            console.log('[LoginManager] Login successful!')
         } catch (error: any) {
-            error.response.status === 401 && (this.isLoggedIn = false)
+            console.error('[LoginManager] Login failed:', error)
+            if (error?.response?.status === 401) {
+                this.isLoggedIn = false
+            }
             throw error
         }
     }

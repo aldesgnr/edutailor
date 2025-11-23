@@ -16,7 +16,7 @@ export const TrainingNotFoundComponent: FunctionComponent<TrainingNotFoundCompon
             }}
         >
             <div className={'h-full flex flex-col  gap-[40px]  justify-between'}>
-                <img src={`${appConfig().BASE_URL}/training-notfound.png`} className={'w-[283px] h-[153px] rounded-[13px]'} />
+                <img src="/training-notfound.png" className={'w-[283px] h-[153px] rounded-[13px]'} />
                 <p className={'text-[12px] leading-[14px]  text-[#ffffff]  '}>{message}</p>
                 <div className={'flex flex-row gap-[14px] justify-center align-center '}>
                     <i className={`${icon} cursor-pointer text-[19px]`} />

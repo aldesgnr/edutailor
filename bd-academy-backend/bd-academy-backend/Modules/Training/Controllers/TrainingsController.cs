@@ -1,4 +1,4 @@
-﻿using bd_academy_backend.Modules.TrainingNamespace.DTO;
+using bd_academy_backend.Modules.TrainingNamespace.DTO;
 using bd_academy_backend.Modules.TrainingNamespace.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -281,9 +281,86 @@ namespace bd_academy_backend.Modules.TrainingNamespace.Controllers
             return NoContent();
         }
 
+        // GET: api/Trainings/{id}/validate
+        // Fix #003: Validate training before publish
+        [HttpGet("{id}/validate")]
+        public async Task<ActionResult<ValidationResult>> ValidateTraining(Guid id)
+        {
+            var training = await _context.Training
+                .Include(t => t.TrainingSections)
+                    .ThenInclude(s => s.TrainingSectionComponents)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (training == null)
+            {
+                return NotFound();
+            }
+
+            var errors = new List<string>();
+
+            // Validate title and description
+            if (string.IsNullOrWhiteSpace(training.Title))
+            {
+                errors.Add("Training title is required");
+            }
+
+            if (string.IsNullOrWhiteSpace(training.Description))
+            {
+                errors.Add("Training description is required");
+            }
+
+            // Validate sections
+            if (training.TrainingSections == null || !training.TrainingSections.Any())
+            {
+                errors.Add("Training must have at least one section");
+            }
+            else
+            {
+                foreach (var section in training.TrainingSections)
+                {
+                    // Validate section has components
+                    if (section.TrainingSectionComponents == null || !section.TrainingSectionComponents.Any())
+                    {
+                        errors.Add($"Section '{section.Title}' has no components");
+                    }
+                    else
+                    {
+                        // Validate each component
+                        foreach (var component in section.TrainingSectionComponents)
+                        {
+                            // Check if SCENE type has title/description
+                            if (component.Type == "SCENE" && string.IsNullOrWhiteSpace(component.Title))
+                            {
+                                errors.Add($"Scene component in section '{section.Title}' has no title");
+                            }
+
+                            // Check if DIALOG type has DialogId
+                            if (component.Type == "DIALOG" && component.DialogId == null)
+                            {
+                                errors.Add($"Dialog component in section '{section.Title}' has no dialog assigned");
+                            }
+                        }
+                    }
+                }
+            }
+
+            return Ok(new ValidationResult
+            {
+                IsValid = !errors.Any(),
+                Errors = errors
+            });
+        }
+
         private bool TrainingExists(Guid id)
         {
             return (_context.Training?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+    }
+
+    // Validation result DTO
+    public class ValidationResult
+    {
+        public bool IsValid { get; set; }
+        public List<string> Errors { get; set; } = new List<string>();
     }
 }

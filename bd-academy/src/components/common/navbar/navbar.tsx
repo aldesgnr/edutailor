@@ -31,7 +31,7 @@ export const Navbar: FunctionComponent<NavbarProps> = ({}) => {
     ]
     return (
         <div className={'navbar'}>
-            <img className={'logo cursor-pointer'} src={`${appConfig().BASE_URL}/logo.png`} alt={'logo'} onClick={() => navigate('/dashboard')} />
+            <img className={'logo cursor-pointer'} src={`/logo.png`} alt={'logo'} onClick={() => navigate('/dashboard')} />
             <div className="navbar-right">
                 {/* FOR FUTURE LAYOUT */}
                 {/* <i className={PrimeIcons.COMMENT}></i>
@@ -47,7 +47,7 @@ export const Navbar: FunctionComponent<NavbarProps> = ({}) => {
                         aria-haspopup
                     >
                         <Avatar
-                            image={`${appConfig().BASE_URL}/person-min.png`}
+                            image="/person-min.png"
                             shape="circle"
                             className={' border-solid border-[1px] border-[#38f2ae]'}
                         ></Avatar>

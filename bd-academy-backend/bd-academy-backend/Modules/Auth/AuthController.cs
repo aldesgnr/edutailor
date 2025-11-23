@@ -1,4 +1,4 @@
-﻿using bd_academy_backend.Controllers.Auth.dto;
+using bd_academy_backend.Controllers.Auth.dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -86,9 +86,10 @@ namespace bd_academy_backend.Controllers.Auth
 
                 return Ok(new
                 {
-                    Token = new JwtSecurityTokenHandler().WriteToken(token),
-                    RefreshToken = refreshToken,
-                    Expiration = token.ValidTo
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    accessToken = new JwtSecurityTokenHandler().WriteToken(token),
+                    refreshToken = refreshToken,
+                    expiration = token.ValidTo
                 });
             }
             return Unauthorized();

@@ -47,25 +47,31 @@ export default class SceneManager {
         this._loadEnvironment()
     }
     private _loadEnvironment() {
-        const files = [
-            {
-                url: appConfig().BASE_URL + '/env/skybox/env.hdr',
-                filename: 'env.hdr',
-            },
-        ]
-        const textureAsset = new Asset('skybox_equi', 'texture', {
-            url: files[0].url,
-            filename: files[0].filename,
-        })
-        textureAsset.ready(() => {
-            const texture = textureAsset.resource
-            if (texture.type === TEXTURETYPE_DEFAULT && texture.format === PIXELFORMAT_RGBA8) {
-                texture.type = TEXTURETYPE_RGBM
-            }
-            this._initEnvironment(texture)
-        })
-        this.app.assets.add(textureAsset)
-        this.app.assets.load(textureAsset)
+        // Skip environment loading - we use manual lighting setup in EditorManager
+        // This prevents the "env.hdr net::ERR_NAME_NOT_RESOLVED" error
+        console.log('[SceneManager] Skipping environment HDR loading (using manual lighting)')
+        return
+        
+        // Original code commented out:
+        // const files = [
+        //     {
+        //         url: appConfig().STATIC_URL + '/static/env/skybox/env.hdr',
+        //         filename: 'env.hdr',
+        //     },
+        // ]
+        // const textureAsset = new Asset('skybox_equi', 'texture', {
+        //     url: files[0].url,
+        //     filename: files[0].filename,
+        // })
+        // textureAsset.ready(() => {
+        //     const texture = textureAsset.resource
+        //     if (texture.type === TEXTURETYPE_DEFAULT && texture.format === PIXELFORMAT_RGBA8) {
+        //         texture.type = TEXTURETYPE_RGBM
+        //     }
+        //     this._initEnvironment(texture)
+        // })
+        // this.app.assets.add(textureAsset)
+        // this.app.assets.load(textureAsset)
     }
     private _initEnvironment(source: Texture) {
         const skybox = EnvLighting.generateSkyboxCubemap(source)

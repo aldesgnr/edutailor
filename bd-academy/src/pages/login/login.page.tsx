@@ -49,18 +49,6 @@ export const LoginPage: FunctionComponent<LoginPageProps> = () => {
     }
     return (
         <div className={'login'}>
-            <Button
-                label="Click me to signin"
-                className={'bg-[var(--primary)] text-[30px]'}
-                onClick={() => {
-                    //TURN OFF
-                    window.localStorage.setItem('user_token', 'test_login')
-                    loginManager.isLoggedIn = true
-                    loginManager.inited.next(true)
-                    navigate('/dashboard')
-                }}
-            />
-            <br />
             <h1>Sign in</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
                 <Controller
@@ -115,11 +103,6 @@ export const LoginPage: FunctionComponent<LoginPageProps> = () => {
                     </label>
                 </div>
                 <Button label="Sign in" type="submit" />
-                <p className={'text-center'}>Login with</p>
-                <div className="login-platforms">
-                    <Button label="Google" icon={PrimeIcons.GOOGLE} />
-                    <Button label="Facebook" icon={PrimeIcons.FACEBOOK} />
-                </div>
 
                 <p>
                     Don't have an account?{' '}

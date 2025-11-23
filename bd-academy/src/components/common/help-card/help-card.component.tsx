@@ -13,7 +13,7 @@ export const HelpCardComponent: FunctionComponent = () => {
             <div className="w-[370px] min-w-[370px] max-w-[370px] h-[158px] min-h-[158px] max-h-[158px] h-auto opacity-35 pointer-events-none flex flex-row">
                 <div
                     className={` bg-center bg-no-repeat  min-w-[158px] h-[158px]`}
-                    style={{ backgroundImage: `url(${appConfig().BASE_URL}/help-card.png)` }}
+                    style={{ backgroundImage: `url(/help-card.png)` }}
                 ></div>
                 <div className={'flex flex-col w-auto  gap-[14px]   p-[16px]'}>
                     <h3

@@ -142,7 +142,7 @@ export default class CameraManager {
         this._addOrbitCameraSupport()
         this._addOrbitCameraMouseInputSupport()
         this._addOrbitCameraMouseTouchSupport()
-        // this._addOrbitCameraKeyboardInputSupport()
+        this._addOrbitCameraKeyboardInputSupport() // Enable WASD + Arrow keys navigation
     }
     public addFirstPersonCameraTools = () => {
         this._addFirstPersonCameraSupport()

@@ -1,4 +1,4 @@
-﻿using bd_academy_backend.Modules.TrainingNamespace.DTO;
+using bd_academy_backend.Modules.TrainingNamespace.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -44,7 +44,8 @@ namespace bd_academy_backend.Modules.TrainingNamespace.Models
             trainingDTO.AvailableUntil = this.AvailableUntil;
             trainingDTO.TrainingValue = this.TrainingValue.Select(trainingValue => trainingValue.Value).ToList();
             trainingDTO.TrainingSections = this.TrainingSections.Select(trainingSection => trainingSection.toDTO()).ToList();
-
+            trainingDTO.Type = this.Type;
+            trainingDTO.Published = this.Published;
             trainingDTO.CreatedAt = this.CreatedAt;
             trainingDTO.DeletedAt = this.DeletedAt;
             trainingDTO.UpdatedAt = this.UpdatedAt;
@@ -59,6 +60,8 @@ namespace bd_academy_backend.Modules.TrainingNamespace.Models
             this.Description = trainingDTO.Description;
             this.Image = trainingDTO.Image;
             this.DurationTime = trainingDTO.DurationTime;
+            this.Type = trainingDTO.Type;
+            this.Published = trainingDTO.Published;
             this.AvailableUntil = trainingDTO.AvailableUntil;
             this.CreatedAt = trainingDTO.CreatedAt;
             this.DeletedAt = trainingDTO.DeletedAt;

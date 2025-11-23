@@ -5,17 +5,18 @@ export default class AmmoManager {
 
     public loadAmmo() {
         return new Promise<void>((resolve) => {
+            const staticUrl = appConfig().STATIC_URL || 'http://localhost:5008'
             if (this.wasmSupported()) {
                 this.loadWasmModuleAsync(
                     'Ammo',
-                    appConfig().BASE_URL + '/static/lib/ammo/ammo.wasm.js',
-                    appConfig().BASE_URL + '/static/lib/ammo/ammo.wasm.wasm',
+                    staticUrl + '/static/lib/ammo/ammo.wasm.js',
+                    staticUrl + '/static/lib/ammo/ammo.wasm.wasm',
                     () => {
                         resolve()
                     },
                 )
             } else {
-                this.loadWasmModuleAsync('Ammo', appConfig().BASE_URL + '/static/lib/ammo/ammo.js', '', () => {
+                this.loadWasmModuleAsync('Ammo', staticUrl + '/static/lib/ammo/ammo.js', '', () => {
                     resolve()
                 })
             }

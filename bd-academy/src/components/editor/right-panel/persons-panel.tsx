@@ -19,7 +19,7 @@ export const PersonsPanel: FunctionComponent<PersonsPanelProps> = ({ onClickAvat
         <div className={' flex flex-col  gap-[16px] text-center'}>
             <p>Persons</p>
             <Divider></Divider>
-            <Hint text={'Click on a Person to add it to the scene'}></Hint>
+            <Hint text={'Select person (Yellow Box) first, then click here to replace'}></Hint>
             <div className={'flex gap-[8px]'}>
                 <AvatarListComponent avatars={avatarsToSelect} onClickAvatar={onClickAvatar}></AvatarListComponent>
             </div>
